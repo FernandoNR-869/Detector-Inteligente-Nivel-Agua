@@ -26,12 +26,11 @@ La medición del nivel del agua es un proceso crítico, tanto en ambientes domé
 | 1 | Fuente de Alimentación | Batería o Fuente DC de 9V | Suministro de energía general del circuito. |
 
 ## III. Memoria de Cálculos
-## III. Memoria de Cálculos
 
-Para el diseño del circuito, se establece una fuente de alimentación de 9V (DC) estándar, adecuada para la operación del LM324 y la activación del buzzer.
+Para que nuestro circuito funcione correctamente, decidimos utilizar una fuente de alimentación de 9V (DC). Elegimos este valor porque es un voltaje muy común, fácil de simular y suficiente para alimentar tanto el amplificador operacional LM324 como el buzzer.
 
-### A. Divisores de Voltaje (Umbrales de Activación)
-Se requiere establecer tres voltajes de referencia para los comparadores (Nivel Bajo, Medio y Alto). Se implementa un divisor de tensión múltiple con cuatro resistencias en serie ($R_1$, $R_2$, $R_3$, $R_4$) de 10 k$\Omega$ cada una. Los umbrales se calculan con la siguiente relación:
+### A. Divisores de Voltaje y Umbrales de Activación
+Para que el sistema sepa cuándo el agua llega a los diferentes niveles, necesitamos establecer tres voltajes de referencia que servirán como umbrales (Bajo, Medio y Alto)[cite: 1]. Para lograrlo, diseñamos un divisor de voltaje usando cuatro resistencias del mismo valor (10 k$\Omega$) conectadas en serie[cite: 1]. Los voltajes de activación se calcularon de la siguiente manera:
 
 $$V_{ref\_alto} = 9\text{ V} \cdot \frac{R_2 + R_3 + R_4}{R_1 + R_2 + R_3 + R_4} = 6.75\text{ V}$$
 
@@ -40,29 +39,29 @@ $$V_{ref\_medio} = 9\text{ V} \cdot \frac{R_3 + R_4}{R_1 + R_2 + R_3 + R_4} = 4.
 $$V_{ref\_bajo} = 9\text{ V} \cdot \frac{R_4}{R_1 + R_2 + R_3 + R_4} = 2.25\text{ V}$$
 
 ### B. Corriente de los LEDs
-Asumiendo una caída de tensión típica de 2V para los LEDs y una corriente de operación óptima de 20 mA ($0.02\text{ A}$), se calcula la resistencia limitadora:
+Para proteger los LEDs indicadores y asegurar que tengan un buen nivel de brillo, tomamos en cuenta que consumen alrededor de 20 mA (0.02 A) y tienen una caída de voltaje de aproximadamente 2V[cite: 1]. Usando la ley de Ohm calculamos la resistencia necesaria:
 
 $$R_{LED} = \frac{V_{CC} - V_{LED}}{I_{LED}} = \frac{9 - 2}{0.02} = 350 \, \Omega$$
 
-Se seleccionará el valor comercial más cercano de 330 $\Omega$ para asegurar el brillo adecuado.
+El resultado exacto es 350 $\Omega$, pero para fines prácticos y para el listado de materiales, usaremos el valor comercial más cercano que es de 330 $\Omega$.
 
 ### C. Polarización del Transistor y Corriente del Buzzer
-El buzzer activo requiere un consumo aproximado de 30 mA. Para activarlo, se utiliza un transistor BJT 2N2222 en estado de corte/saturación. Asumiendo una ganancia mínima ($\beta$) de 100, la corriente de base necesaria es:
+El buzzer que vamos a utilizar como alarma necesita una corriente de unos 30 mA para emitir sonido[cite: 1]. Como el LM324 no siempre puede entregar tanta corriente de forma segura, usamos un transistor BJT 2N2222 funcionando como un interruptor[cite: 1]. Sabiendo que la ganancia mínima ($\beta$) de este transistor es de 100, primero calculamos la corriente mínima que necesitamos en su base:
 
 $$I_B \geq \frac{I_C}{\beta} = \frac{30\text{ mA}}{100} = 0.3\text{ mA}$$
 
-Para garantizar una saturación profunda, se aplica un factor de sobremarcha de 10, fijando $I_B = 3\text{ mA}$. El voltaje de salida del LM324 en estado alto es de aproximadamente 7.5V. El cálculo de la resistencia de base ($R_B$) es:
+Para estar completamente seguros de que el transistor se active bien (que entre en saturación)[cite: 1], multiplicamos esa corriente por un factor de seguridad de 10, lo que nos da 3 mA. Como sabemos que el LM324 entrega unos 7.5V cuando se activa el nivel alto, calculamos la resistencia para la base del transistor:
 
-$$R_B = \frac{V_{out} - V_{BE}}{I_B} = \frac{7.5 - 0.7}{0.003} = 2266 \, \Omega$$
+$$R_B = \frac{V_{out} - V_{BE}}{I_B} = \frac{7.5 - 0.7}{0.003} \approx 2266 \, \Omega$$
 
-Se utilizará una resistencia estándar de 2.2 k$\Omega$.
+Seleccionamos una resistencia estándar de 2.2 k$\Omega$.
 
 ### D. Potencia Disipada
-Para validar la seguridad térmica del transistor 2N2222 (que soporta hasta 625 mW), se calcula su disipación en estado de saturación (asumiendo $V_{CE(sat)} \approx 0.2\text{ V}$):
+Finalmente, para comprobar la seguridad del circuito, calculamos cuánta potencia va a disipar el componente principal (el transistor) cuando esté encendido, para asegurarnos de que no se caliente demasiado[cite: 1]. Considerando un voltaje colector-emisor en saturación de 0.2V:
 
 $$P_Q = V_{CE(sat)} \cdot I_C = 0.2 \cdot 0.03 = 0.006\text{ W} = 6\text{ mW}$$
 
-El transistor operará completamente dentro de su margen de seguridad térmica.
+Como la hoja de datos del 2N2222 indica que soporta hasta 625 mW, con estos 6 mW comprobamos teóricamente que el transistor trabajará de forma muy holgada y segura.
 
 ## IV. Simulación y Resultados
 (Espacio para capturas del circuito operando en Proteus y la tabla comparativa de estados).
