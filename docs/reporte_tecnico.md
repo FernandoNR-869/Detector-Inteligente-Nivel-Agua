@@ -7,7 +7,7 @@
 Este documento detalla el diseño, cálculo y simulación de un detector de nivel de agua basado en electrónica analógica. El sistema indica visualmente tres niveles de un depósito y activa una alarma sonora al alcanzar su capacidad máxima.
 
 ## I. Introducción
-(Aquí redactaremos la investigación sobre la importancia del monitoreo de agua y el funcionamiento básico de los sensores de nivel).
+La medición del nivel del agua es un proceso crítico, tanto en ambientes domésticos, como industriales y de construcción. La falta de un control adecuado genera pérdidas importantes de agua, daños mecánicos por funcionamiento en seco de las bombas e incluso riesgos de infraestructura por desbordamientos. Ante la necesidad de una empresa de automatización por un sistema económico y confiable, este proyecto documenta el desarrollo de un detector de nivel de agua basado en electrónica analógica pura. El sistema propuesto, empleando sensores de conductividad, comparadores de voltaje y transistores en estado de conmutación, monitorea continuamente el tanque actualizando de forma automática los indicadores visuales (Bajo, Medio, Alto) y activando una alerta sonora al llegar a niveles críticos.
 
 ## II. Diseño del Sistema
 ### A. Diagrama de Bloques
