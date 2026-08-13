@@ -12,3 +12,7 @@ Sistema económico basado en electrónica analógica para monitorear y alertar s
 *   `/docs`: Documento técnico, Memoria de cálculos y BOM.
 *   `/simulacion`: Archivos del esquemático en Proteus.
 *   `/media`: Evidencias, fotografías y video de funcionamiento.
+
+## Autores
+*   **Fernando Navarro Rodríguez**
+*   **Andrea Romero Pilar**
