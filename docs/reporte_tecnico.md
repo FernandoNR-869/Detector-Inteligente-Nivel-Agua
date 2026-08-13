@@ -11,7 +11,6 @@ La medición del nivel del agua es un proceso crítico, tanto en ambientes domé
 
 ## II. Diseño del Sistema
 ### A. Diagrama de Bloques
-
 ```mermaid
 graph TD
     A[Depósito de Agua] -->|Variación física| B(Sensor de Nivel / Electrodos)
@@ -26,6 +25,7 @@ graph TD
     
     I[Fuente de Alimentación 9V] -.-> C
     I -.-> H
+```
 
 ### B. Lista de Materiales (BOM)
 | Cantidad | Componente | Descripción / Modelo Sugerido | Función en el Sistema |
