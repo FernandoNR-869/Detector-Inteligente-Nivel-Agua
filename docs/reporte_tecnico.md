@@ -14,7 +14,16 @@ La medición del nivel del agua es un proceso crítico, tanto en ambientes domé
 (Espacio para insertar la imagen del diagrama).
 
 ### B. Lista de Materiales (BOM)
-(Tabla con los componentes: sensor, LM324, LEDs, buzzer, transistor y diodos).
+| Cantidad | Componente | Descripción / Modelo Sugerido | Función en el Sistema |
+| :---: | :--- | :--- | :--- |
+| 1 | Amplificador Operacional | LM324 (Cuádruple) | Comparadores de voltaje para los 3 niveles. |
+| 1 | Sensor de Nivel | Arreglo de electrodos / Switch | Detectar la presencia de agua (conductividad). |
+| 3 | Diodo LED | 5mm (Rojo, Amarillo, Verde) | Indicadores visuales de nivel (Bajo, Medio, Alto). |
+| 1 | Zumbador (Buzzer) | Buzzer Activo 5V/9V | Alarma sonora para el nivel crítico (Alto). |
+| 1 | Transistor BJT | 2N2222A (NPN) | Interruptor para activar el buzzer. |
+| 2 | Diodo Rectificador/Señal | 1N4148 o 1N4007 | Diodo flyback para el buzzer y protección. |
+| Var. | Resistencias | 330Ω, 2.2kΩ, 10kΩ | Divisores de voltaje, limitadores de LED y base BJT. |
+| 1 | Fuente de Alimentación | Batería o Fuente DC de 9V | Suministro de energía general del circuito. |
 
 ## III. Memoria de Cálculos
 (Sección para la fuente de alimentación, divisores de voltaje, polarización de transistores, corriente de LEDs y potencia).
