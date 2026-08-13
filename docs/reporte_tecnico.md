@@ -78,7 +78,19 @@ $$P_Q = V_{CE(sat)} \cdot I_C = 0.2 \cdot 0.03 = 0.006\text{ W} = 6\text{ mW}$$
 Como la hoja de datos del 2N2222 indica que soporta hasta 625 mW, con estos 6 mW comprobamos teóricamente que el transistor trabajará de forma muy holgada y segura.
 
 ## IV. Simulación y Resultados
-(Espacio para capturas del circuito operando en Proteus y la tabla comparativa de estados).
+
+Para validar nuestra memoria de cálculos, implementamos el circuito en un entorno de simulación electrónica. Para emular el comportamiento físico del sensor de nivel (los electrodos dentro del tanque), utilizamos interruptores lógicos (logic toggles) que simulan el cierre del circuito cuando el agua, al ser conductora, alcanza cada nivel específico.
+
+Al correr la simulación, monitoreamos el comportamiento del LM324 y verificamos que los voltajes de referencia coincidieran con los umbrales calculados. A continuación, presentamos la tabla comparativa que demuestra los cambios de estado del sistema conforme sube el nivel del agua:
+
+| Estado del Depósito | Voltaje de Entrada Simulado | Indicador Visual Activado | Estado de la Alarma (Buzzer) |
+| :--- | :---: | :---: | :---: |
+| **Vacío** | < 2.25V | Ninguno | Apagado |
+| **Nivel Bajo** | > 2.25V | LED Rojo | Apagado |
+| **Nivel Medio** | > 4.50V | LED Amarillo | Apagado |
+| **Nivel Alto (Crítico)** | > 6.75V | LED Verde | **Encendido (30 mA)** |
+
+*(Nota: En este espacio se insertarán las capturas de pantalla de la simulación mostrando el circuito en sus diferentes estados, demostrando el flujo de corriente hacia los LEDs y la saturación del transistor BJT).*
 
 ## V. Conclusión
 (Análisis final y validación técnica del proyecto).
