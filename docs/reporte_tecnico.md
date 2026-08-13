@@ -11,7 +11,20 @@ La medición del nivel del agua es un proceso crítico, tanto en ambientes domé
 
 ## II. Diseño del Sistema
 ### A. Diagrama de Bloques
-(Espacio para insertar la imagen del diagrama).
+```mermaid
+graph TD
+    A[Depósito de Agua] -->|Variación física| B(Sensor de Nivel / Electrodos)
+    B -->|Señal de voltaje| C{Etapa de Control: Comparadores LM324}
+    
+    C -->|Voltaje > Umbral Bajo| D[Indicador: LED Rojo]
+    C -->|Voltaje > Umbral Medio| E[Indicador: LED Amarillo]
+    C -->|Voltaje > Umbral Alto| F[Indicador: LED Verde]
+    
+    C -->|Señal Crítica Alto| G(Etapa de Conmutación: Transistor BJT)
+    G -->|Activación de corriente| H((Alarma Sonora: Buzzer))
+    
+    I[Fuente de Alimentación 9V] -.-> C
+    I -.-> H
 
 ### B. Lista de Materiales (BOM)
 | Cantidad | Componente | Descripción / Modelo Sugerido | Función en el Sistema |
