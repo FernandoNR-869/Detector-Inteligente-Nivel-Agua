@@ -104,6 +104,10 @@ Al variar la entrada analógica mediante el potenciómetro (simulando el sensor 
 ### D. Observaciones de la Simulación
 La simulación confirmó que la lógica programada responde correctamente a la transición de los estados calculados. Se observó una conmutación limpia de las salidas digitales, sin rebotes eléctricos (debido al entorno virtual ideal) y una correcta activación del zumbador al alcanzar el estado crítico. Estos resultados validan que la lógica de control es funcional y que los umbrales de seguridad establecidos en la memoria de cálculos teóricos son aplicables tanto en dominios analógicos como en sistemas de control digital.
 
+La demostración completa del funcionamiento del sistema, junto con la explicación técnica de la simulación en Wokwi y la lógica implementada en MicroPython, se puede consultar en el siguiente enlace:
+
+* **[Enlace al Video Explicativo del Proyecto](https://drive.google.com/file/d/1bOHy4-GMGvpOdRw2NqZLTbuPnlRriqPz/view?usp=sharing)**
+
 <img width="1108" height="949" alt="image" src="https://github.com/user-attachments/assets/ba795dd2-14fb-499d-8fe5-5a06009edcbe" />
 
 <img width="1080" height="893" alt="image" src="https://github.com/user-attachments/assets/c8a593b0-84c1-4872-a9b3-b8d9bd2b89e4" />
