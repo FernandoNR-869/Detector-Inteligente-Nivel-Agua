@@ -112,4 +112,18 @@ La simulación confirmó que la lógica programada responde correctamente a la t
 
 
 ## V. Conclusión
-(Análisis final y validación técnica del proyecto).
+
+### A. Conclusión Técnica
+El desarrollo de este proyecto permitió conceptualizar, diseñar y validar un sistema automatizado de control y monitoreo de nivel de agua. A través de este proceso, se logró integrar los fundamentos de la electrónica analógica con las ventajas de la lógica de control digital, proporcionando una solución robusta y escalable.
+
+Si bien el planteamiento inicial del sistema consideraba una arquitectura basada en electrónica analógica pura mediante amplificadores operacionales y divisores de voltaje resistivos, la transición hacia un prototipado virtual digital mediante la plataforma Raspberry Pi Pico demostró ser una decisión técnica estratégica. Esta migración facilitó la implementación de umbrales de conmutación de alta precisión, ajustables mediante software, eliminando las tolerancias de error inherentes a los componentes pasivos discretos y simplificando la complejidad del enrutamiento físico.
+
+Es imperativo aclarar que la memoria de cálculos teóricos presentada en la Sección III conserva su validez absoluta y constituye el marco de referencia necesario para cualquier implementación en hardware real. La ausencia de componentes pasivos —como resistencias de polarización o limitación de corriente— en la simulación virtual se debe a que el entorno de desarrollo opera bajo un modelo lógico ideal. Sin embargo, dicha sección teórica actúa como la hoja de ruta obligatoria para una futura implementación sobre placa protoboard; el uso de los valores calculados será estrictamente necesario en el hardware físico para salvaguardar la integridad de los diodos LED y los transistores frente a sobrecorrientes.
+
+### B. Conclusiones Personales
+
+**Fernando Navarro Rodríguez:**
+"El desarrollo de este sistema me permitió comprender a fondo la relación entre la teoría matemática de los circuitos analógicos y su implementación práctica mediante el software. Aunque inicialmente nos enfrentamos al desafío de diseñar la circuitería analógica, el proceso de digitalización mediante MicroPython me brindó una visión más clara sobre cómo el software puede optimizar el control de hardware. Este proyecto refuerza mi capacidad para analizar problemas de ingeniería desde múltiples enfoques, priorizando la eficiencia y la precisión en la lógica de control."
+
+**Andrea Romero Pilar:**
+"Este proyecto fue una oportunidad valiosa para aplicar metodologías de diseño de sistemas en un entorno controlado. La transición del diseño analógico al digital no solo puso a prueba nuestras habilidades de programación, sino también nuestra capacidad de documentación técnica y validación. Aprendí que la clave de un buen sistema no reside únicamente en que funcione, sino en la capacidad de justificar técnicamente cada decisión de diseño, asegurando que el sistema sea confiable, escalable y, sobre todo, reproducible en escenarios de implementación real."
