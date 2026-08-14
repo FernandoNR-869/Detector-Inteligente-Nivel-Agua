@@ -79,18 +79,37 @@ Como la hoja de datos del 2N2222 indica que soporta hasta 625 mW, con estos 6 mW
 
 ## IV. Simulación y Resultados
 
-Para validar nuestra memoria de cálculos, implementamos el circuito en un entorno de simulación electrónica. Para emular el comportamiento físico del sensor de nivel (los electrodos dentro del tanque), utilizamos interruptores lógicos (logic toggles) que simulan el cierre del circuito cuando el agua, al ser conductora, alcanza cada nivel específico.
+### A. Entorno de Simulación
+Para validar el diseño teórico del sistema, se optó por un entorno de prototipado virtual utilizando una plataforma basada en la arquitectura Raspberry Pi Pico. Esta decisión se tomó para garantizar una alta precisión en la conmutación de señales y una respuesta en tiempo real, permitiendo la validación del sistema sin las variables de ruido electromagnético y tolerancias de componentes que pudieran presentarse en una fase temprana de prototipado físico.
 
-Al correr la simulación, monitoreamos el comportamiento del LM324 y verificamos que los voltajes de referencia coincidieran con los umbrales calculados. A continuación, presentamos la tabla comparativa que demuestra los cambios de estado del sistema conforme sube el nivel del agua:
+### B. Mapeo de Umbrales: De la Teoría a la Digitalización
+Aunque el diseño inicial planteaba una arquitectura analógica (Sección III), se realizó una equivalencia lógica para mantener la integridad de los umbrales calculados. El conversor analógico-digital (ADC) de 12 bits de la Raspberry Pi Pico permite una resolución de $2^{12} = 4096$ niveles, o bien, un rango de lectura de 0 a 65,535 según la implementación de MicroPython. Los umbrales teóricos de voltaje calculados previamente fueron mapeados a los valores digitales correspondientes mediante la siguiente relación:
 
-| Estado del Depósito | Voltaje de Entrada Simulado | Indicador Visual Activado | Estado de la Alarma (Buzzer) |
+*   **Umbral Bajo (2.25V):** Equivale aproximadamente al 25% del rango de lectura.
+*   **Umbral Medio (4.50V):** Equivale al 50% del rango de lectura.
+*   **Umbral Alto (6.75V):** Equivale al 75% del rango de lectura.
+
+### C. Análisis del Comportamiento del Sistema
+El script en MicroPython implementó una estructura de ciclo infinito (`while True`) con una frecuencia de muestreo de 10 Hz, suficiente para detectar cambios en el nivel de agua sin saturar los recursos del procesador. 
+
+Al variar la entrada analógica mediante el potenciómetro (simulando el sensor de nivel), se observó una respuesta determinista en los actuadores. La tabla siguiente resume el comportamiento del sistema bajo las condiciones probadas:
+
+| Estado del Depósito | Lectura ADC (aprox.) | Indicador Visual | Estado de la Alarma (Buzzer) |
 | :--- | :---: | :---: | :---: |
-| **Vacío** | < 2.25V | Ninguno | Apagado |
-| **Nivel Bajo** | > 2.25V | LED Rojo | Apagado |
-| **Nivel Medio** | > 4.50V | LED Amarillo | Apagado |
-| **Nivel Alto (Crítico)** | > 6.75V | LED Verde | **Encendido (30 mA)** |
+| **Vacío** | < 16,384 | Apagado | Apagado |
+| **Nivel Bajo** | 16,384 - 32,768 | LED Verde (GP15) | Apagado |
+| **Nivel Medio** | 32,768 - 49,152 | LED Amarillo (GP14) | Apagado |
+| **Nivel Alto (Crítico)** | > 49,152 | LED Rojo (GP13) | **Encendido (GP12)** |
 
-*(Nota: En este espacio se insertarán las capturas de pantalla de la simulación mostrando el circuito en sus diferentes estados, demostrando el flujo de corriente hacia los LEDs y la saturación del transistor BJT).*
+### D. Observaciones de la Simulación
+La simulación confirmó que la lógica programada responde correctamente a la transición de los estados calculados. Se observó una conmutación limpia de las salidas digitales, sin rebotes eléctricos (debido al entorno virtual ideal) y una correcta activación del zumbador al alcanzar el estado crítico. Estos resultados validan que la lógica de control es funcional y que los umbrales de seguridad establecidos en la memoria de cálculos teóricos son aplicables tanto en dominios analógicos como en sistemas de control digital.
+
+<img width="1108" height="949" alt="image" src="https://github.com/user-attachments/assets/ba795dd2-14fb-499d-8fe5-5a06009edcbe" />
+
+<img width="1080" height="893" alt="image" src="https://github.com/user-attachments/assets/c8a593b0-84c1-4872-a9b3-b8d9bd2b89e4" />
+
+<img width="1070" height="842" alt="image" src="https://github.com/user-attachments/assets/b031711e-e4d8-4cc5-a132-33a72b9995e5" />
+
 
 ## V. Conclusión
 (Análisis final y validación técnica del proyecto).
