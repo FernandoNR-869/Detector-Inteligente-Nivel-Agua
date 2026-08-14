@@ -2,6 +2,8 @@
 
 Sistema automatizado de monitoreo y control de nivel de agua, diseñado bajo un enfoque teórico analógico y validado mediante una arquitectura de control digital en entorno virtual.
 
+* **Evidencia en Video:** [Ver Demostración y Explicación del Proyecto](https://drive.google.com/file/d/1bOHy4-GMGvpOdRw2NqZLTbuPnlRriqPz/view?usp=sharing)
+
 ## Arquitectura y Tecnologías
 
 * **Plataforma de Control:** Raspberry Pi Pico (RP2040).
